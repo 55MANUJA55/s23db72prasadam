@@ -6,13 +6,14 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const connectionString = process.env.MONGO_CON;
-var Costume = require("./models/costume");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var BadmintonRouter = require('./routes/Badminton');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var resourseRouter = require('./routes/resourse');
+
+const Badminton = require('./models/Badminton');
 
 var app = express();
 
@@ -30,11 +31,11 @@ db.once('open', function () {
 
 async function recreateDB(){
 
- await Costume.deleteMany();
+ await Badminton.deleteMany();
  
- let instance1 = new Costume({costume_type:"skirt", costume_size:'large',costume_cost:25.5});
- let instance2 = new Costume({costume_type:"frock", costume_size:'medium',costume_cost:15.0});
- let instance3 = new Costume({costume_type:"shirt", costume_size:'small',costume_cost:9.6});
+ let instance1 = new Badminton({Player_Name:"Nandu Natekar",Player_Age :88,No_Of_Matches_Played:32});
+ let instance2 = new Badminton({Player_Name:"Pullela Gopichand",Player_Age :49,No_Of_Matches_Played:8});
+ let instance3 = new Badminton({Player_Name:"Prakash Padukone",Player_Age :68,No_Of_Matches_Played:25});
  instance1.save().then(doc=>{
  console.log("First object saved")}
  ).catch(err=>{
@@ -67,13 +68,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/resourse', resourseRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/Badminton', BadmintonRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
-app.use('/resourse', resourseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
