@@ -68,6 +68,30 @@ exports.Badminton_create_post =async  function(req, res) {
 };
 
 
-exports.Badminton_delete = function(req, res) {
-  res.send('NOT IMPLEMENTED: Badminton delete DELETE ' + req.params.id);
+// Handle Costume delete on DELETE.
+exports.Badminton_delete = async function(req, res) {
+ console.log("delete " + req.params.id)
+ try {
+ result = await BadmintonModel.findByIdAndDelete( req.params.id)
+ console.log("Removed " + result)
+ res.send(result)
+ } catch (err) {
+ res.status(500)
+ res.send(`{"error": Error deleting ${err}}`);
+ }
 };
+
+//view
+// Handle a show one view with id specified by query
+exports.Badminton_view_one_Page = async function(req, res) {
+  console.log("single view for id " + req.query.id)
+  try{
+  result = await BadmintonModel.findById( req.query.id)
+  res.render('Badmintondetail', 
+ { title: 'Badminton Detail', toShow: result });
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+ };

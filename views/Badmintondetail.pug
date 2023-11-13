@@ -1,0 +1,23 @@
+extends layout
+block content
+    h1= title
+     if (toShow == null)
+        h2 No instance to get details
+     else
+        - let Badmintonid = toShow._id
+        - let PlayerName = toShow.Player_Name
+        - let PlayerAge = toShow.Player_Age
+        - let NoOfMatchesPlayed = toShow.No_Of_Matches_Played
+        div
+        div.row
+        div(class='BadmintonAttr mr-3') Badminton ID is:
+        div #{Badmintonid}
+        div.row
+        div(class='BadmintonAttr mr-3') Badminton Player Name is:
+        div #{PlayerName}
+        div.row
+        div(class='BadmintonAttr mr-3') Badminton Player Age is:
+        div #{PlayerAge}
+        div.row
+        div(class='BadmintonAttr mr-3') No of matches Played is:
+        div #{NoOfMatchesPlayed}
