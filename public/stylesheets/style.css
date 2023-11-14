@@ -8,10 +8,16 @@ a {
 }
 .BadmintonAttr {
   background-color: aquamarine;
-  width: 120px; 
+  width: 200px; 
   font-family: 'Times New Roman', Times, serif;
   font-size: medium;
   font-style: italic;
  }
- 
+ h1{
+  background-color:lightgreen;
+  color: navy;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: oblique;
+  font-size: medium;
+}
 
