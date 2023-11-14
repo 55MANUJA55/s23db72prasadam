@@ -1,0 +1,53 @@
+extends layout
+
+block content
+    h1= title
+
+    if (toShow == null)
+        h2 No instance to delete
+    else
+        - let Badmintonid = toShow._id
+        - let playername = toShow.Player_Name
+        - let playerage = toShow.Player_Age
+        - let noofmatchesplayed = toShow.No_Of_Matches_Played
+        - let actionid = "/resourse/Badminton/" + Badmintonid
+        script let actionid = "#{actionid}"
+        div
+            div.row
+                div(class='BadmintonAttr mr-3') Badminton ID is:
+                div #{Badmintonid}
+            div.row
+                div(class='BadmintonAttr mr-3') Badminton Player Name is:
+                div #{playername}
+            div.row
+                div(class='BadmintonAttr mr-3') Badminton Player Age is:
+                div #{playerage}
+            div.row
+                div(class='BadmintonAttr mr-3') No of matches Played is:
+                div #{noofmatchesplayed}
+
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+        function cancel() {
+            // Go back to the home page for the Badminton collection
+            window.location.href='/Badminton'
+        }
+    script.
+        function deleteOnid() {
+            console.log("starting delete")
+            // delete first
+            fetch(actionid, {
+                method: 'DELETE'      // Don't need a body for the delete
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/Badminton'
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Delete failed " + error )
+            });
+        }
