@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  //- p = results
+ 
   - let items = results;
   console.log(items)
   div.container-fluid
@@ -13,11 +13,8 @@ block content
           | Badminton: #{item.Player_Name} (#{item.Player_Age}) #{item.No_Of_Matches_Played}
           <br>
           button.btn.btn-primary.ml-1(onclick=`dispatch('${destination}')`) Update
-          
 
-  //- script.
-  //-   function dispatch(path) {
-  //-     window.location.href = path;
-  //-   }
-
-    
+  script.
+    function dispatch(path) {
+      window.location.href = path;
+    }
