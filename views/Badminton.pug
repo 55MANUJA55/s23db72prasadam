@@ -2,18 +2,22 @@ extends layout
 
 block content
   h1= title
-  - let badminton=results
+  //- p = results
+  - let items = results;
+  console.log(items)
+  div.container-fluid
+    div.row.m-1
+      each item in items
+        - let destination = `/Badminton/update?id=${item._id}`
+        div.row-sm-2.m-1
+          | Badminton: #{item.Player_Name} (#{item.Player_Age}) #{item.No_Of_Matches_Played}
+          <br>
+          button.btn.btn-primary.ml-1(onclick=`dispatch('${destination}')`) Update
+          
+
+  //- script.
+  //-   function dispatch(path) {
+  //-     window.location.href = path;
+  //-   }
+
     
-    div(class="container-fluid mt-3")
-    div(class="row")
-        each Badminton,index in badminton
-            div(class="col-sm-2 bg-primary m-1 p-3" onclick=`buy(${index})`) #{Badminton.Player_Name} - #{Badminton.Player_Age} - #{Badminton.No_Of_Matches_Played}
-            
-    script.
-
-     function buy(itemNo)
-      {
-        alert(`You purchased Item ${itemNo+1}`)
-      }
-
-

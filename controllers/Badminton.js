@@ -68,6 +68,18 @@ exports.Badminton_create_post =async  function(req, res) {
 };
 
 
+exports.Badminton_view_all_Page = async function(req, res) {
+  try{
+  theBadminton = await BadmintonModel.find();
+  console.log(theBadminton, "data")
+  res.render('Badminton', { title: 'Badminton Search Results', results : theBadminton });
+  }
+  catch(err){
+  res.status(500);
+  res.send(`{"error": ${err}}`);
+  }
+ };
+
 // Handle Costume delete on DELETE.
 exports.Badminton_delete = async function(req, res) {
  console.log("delete " + req.params.id)
@@ -137,3 +149,5 @@ exports.Badminton_delete_Page = async function(req, res) {
  res.send(`{'error': '${err}'}`);
  }
 };
+
+
