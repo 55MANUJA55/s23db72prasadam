@@ -6,13 +6,22 @@ block content
   - let items = results;
   console.log(items)
   div.container-fluid
+    - let dest1 = `dispatch(\"/Badminton/create")`
+    button.btn( class="btn-success ml-1", onclick = dest1) Create
     div.row.m-1
       each item in items
         - let destination = `/Badminton/update?id=${item._id}`
+        -let dest2 = `dispatch(\"/Badminton/delete?id=${item._id}\")`
+        - let dest3 = `dispatch(\"/Badminton/detail?id=${item._id}\")`
         div.row-sm-2.m-1
           | Badminton: #{item.Player_Name} (#{item.Player_Age}) #{item.No_Of_Matches_Played}
           <br>
           button.btn.btn-primary.ml-1(onclick=`dispatch('${destination}')`) Update
+          <br>
+          button.btn( class="btn-warning ml-1", onclick= dest2) Delete
+          br
+          button.btn( class="btn-secondary ml-1", onclick= dest3) Details
+
 
   script.
     function dispatch(path) {
